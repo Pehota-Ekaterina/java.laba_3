@@ -1,3 +1,4 @@
+import javax.swing.*;
 import javax.swing.table.AbstractTableModel;
 
 
@@ -28,7 +29,7 @@ public class GornerTableModel extends AbstractTableModel {
     }
 
     public int getColumnCount() {
-        return 2;
+        return 3;
     }
 
     public int getRowCount() {
@@ -39,15 +40,34 @@ public class GornerTableModel extends AbstractTableModel {
 
         double x = from + step * row;
 
+        double result = 0.0;
+        int n = coefficients.length - 1;
+        for (int i = 0; i <= n; i++) {
+            result += coefficients[i] * Math.pow(x, (n - i));
+        }
+
         if (col == 0) {
             return x;
-        } else {
-            Double result = 0.0;
-            int n = coefficients.length - 1;
-            for (int i = 0; i <= n; i++) {
-                result += coefficients[i] * Math.pow(x, (n - i));
-            }
+        } else if (col == 1) {
             return result;
+        } else {
+            int xIntegralPart = (int) x;
+            int resultIntegralPart = (int) result;
+            int k = 0;
+
+           for (int i = 1; i <= xIntegralPart; i++) {
+                if (xIntegralPart % i == 0) {
+                    if (resultIntegralPart % i == 0) {
+                        k++;
+                    }
+                }
+            }
+
+            if (k == 1) {
+                return true;
+            } else {
+                return false;
+            }
         }
     }
 
@@ -55,12 +75,18 @@ public class GornerTableModel extends AbstractTableModel {
         switch (col) {
             case 0:
                 return "Значение X";
-            default:
+            case 1:
                 return "Значение многочлена";
+            default:
+                return "Взаимно простые?";
         }
     }
 
     public Class<?> getColumnClass(int col) {
-        return Double.class;
+        if (col == 2) {
+            return Boolean.class;
+        } else {
+            return Double.class;
+        }
     }
 }

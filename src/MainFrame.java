@@ -20,6 +20,7 @@ public class MainFrame extends JFrame {
     private JMenuItem saveToTextMenuItem;
     private JMenuItem saveToGraphicsMenuItem;
     private JMenuItem searchValueMenuItem;
+    private JMenuItem informationMenuItem;
 
     // Поля ввода для считывания значений переменных
     private JTextField textFieldFrom;
@@ -54,7 +55,8 @@ public class MainFrame extends JFrame {
         JMenu tableMenu = new JMenu("Таблица");
 // Добавить его в главное меню
         menuBar.add(tableMenu);
-
+        JMenu referenceMenu = new JMenu ("Справка");
+        menuBar.add(referenceMenu);
 
 // Создать новое "действие" по сохранению в текстовый файл
         Action saveToTextAction = new AbstractAction("Сохранить в текстовый файл") {
@@ -102,6 +104,15 @@ public class MainFrame extends JFrame {
 
         searchValueMenuItem = tableMenu.add(searchValueAction);
         searchValueMenuItem.setEnabled(false);
+
+        Action informationAction = new AbstractAction("О программе") {
+            public void actionPerformed(ActionEvent event) {
+                JOptionPane.showMessageDialog(MainFrame.this, "Пехота, 9 груупа");
+            }
+        };
+
+        informationMenuItem = referenceMenu.add(informationAction);
+        informationMenuItem.setEnabled(true);
 
         JLabel labelForFrom = new JLabel("X изменяется на интервале от:");
         textFieldFrom = new JTextField("0.0", 10);
