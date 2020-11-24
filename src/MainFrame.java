@@ -107,7 +107,7 @@ public class MainFrame extends JFrame {
 
         Action informationAction = new AbstractAction("О программе") {
             public void actionPerformed(ActionEvent event) {
-                JOptionPane.showMessageDialog(MainFrame.this, "Пехота, 9 груупа");
+                JOptionPane.showMessageDialog(MainFrame.this, "Пехота, 9 группа");
             }
         };
 
