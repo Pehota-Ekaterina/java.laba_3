@@ -34,8 +34,33 @@ public class GornerTableCellRenderer implements TableCellRenderer {
         String formattedDouble = formatter.format(value);
         label.setText(formattedDouble);
 
+        if (col == 0) {
+            String[] val = formattedDouble.split("\\.");
+            int k = 0;
+            if(val.length > 1) {
+                k = val[1].length();
+            }
+
+            if(k<=3) {
+                panel.setBackground(Color.ORANGE);
+            } else {
+                panel.setBackground(Color.WHITE);
+            }
+            return panel;
+        }
+
         if (col==1 && needle!=null && needle.equals(formattedDouble)) {
             panel.setBackground(Color.RED);     //окрасить в красный
+        } else if(col == 1 ) {
+            String[] val = formattedDouble.split("\\.");
+            int k = 0;
+            if(val.length > 1) {
+                k = val[1].length();
+            }
+
+            if(k<=3) {
+                panel.setBackground(Color.ORANGE);
+            }
         } else {
             panel.setBackground(Color.WHITE);       //окрасить в белый
         }
