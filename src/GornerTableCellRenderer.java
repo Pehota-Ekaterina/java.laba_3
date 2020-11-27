@@ -33,9 +33,11 @@ public class GornerTableCellRenderer implements TableCellRenderer {
 
         String formattedDouble = formatter.format(value);
         label.setText(formattedDouble);
+        String[] val = formattedDouble.split("\\.");
 
-        if (col == 0) {
-            String[] val = formattedDouble.split("\\.");
+        if (col==1 && needle!=null && needle.equals(formattedDouble)) {
+            panel.setBackground(Color.RED);     //окрасить в красный
+        } else  if (col == 0){
             int k = 0;
             if(val.length > 1) {
                 k = val[1].length();
@@ -46,13 +48,7 @@ public class GornerTableCellRenderer implements TableCellRenderer {
             } else {
                 panel.setBackground(Color.WHITE);
             }
-            return panel;
-        }
-
-        if (col==1 && needle!=null && needle.equals(formattedDouble)) {
-            panel.setBackground(Color.RED);     //окрасить в красный
         } else if(col == 1 ) {
-            String[] val = formattedDouble.split("\\.");
             int k = 0;
             if(val.length > 1) {
                 k = val[1].length();
@@ -60,9 +56,9 @@ public class GornerTableCellRenderer implements TableCellRenderer {
 
             if(k<=3) {
                 panel.setBackground(Color.ORANGE);
+            } else {
+                panel.setBackground(Color.WHITE);       //окрасить в белый
             }
-        } else {
-            panel.setBackground(Color.WHITE);       //окрасить в белый
         }
         return panel;
     }
